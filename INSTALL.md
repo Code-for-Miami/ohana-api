@@ -65,6 +65,12 @@ your needs.
 
 _Note: Installation and preparation can take several minutes to complete!_
 
+### Install phantomjs
+
+On OS X, you can install phantomjs using Homebrew:
+
+    brew install phantomjs
+
 ### Run the app
 
 Start the app locally on port 8080:
