@@ -1,0 +1,22 @@
+%h3 Location Search
+
+%table
+  %thead
+    %tr
+      %th name
+      %th organization
+      %th address
+      %th phones
+      %th literally everything else
+  %tbody
+    - locations.each do |l|
+      %tr
+        %th= l.name
+        %td
+          %pre= l.organization.pretty_inspect
+        %td
+          %pre= l.address.pretty_inspect
+        %td
+          %pre= l.phones.pretty_inspect
+        %td
+          %pre= l.pretty_inspect
