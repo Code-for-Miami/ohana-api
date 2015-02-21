@@ -23,7 +23,12 @@ module Api
           services: [:categories, :contacts, :phones, :regular_schedules,
                      :holiday_schedules]
           ).find(params[:id])
-        render json: location, status: 200 if stale?(location, public: true)
+
+        respond_to do |format|
+          format.json { render json: location, status: 200 if stale?(location, public: true) }
+          format.html { render locals: { location: location } }
+        end
+        
       end
 
       def update
