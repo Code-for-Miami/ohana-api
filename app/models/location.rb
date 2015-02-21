@@ -36,8 +36,8 @@ class Location < ActiveRecord::Base
             },
             unless: ->(location) { location.virtual? }
 
-  validates :description, :organization, :name,
-            presence: { message: I18n.t('errors.messages.blank_for_location') }
+  # validates :description, :organization, :name,
+  #           presence: { message: I18n.t('errors.messages.blank_for_location') }
 
   ## Uncomment the line below if you want to require a short description.
   ## We recommend having a short description so that web clients can display
@@ -95,6 +95,13 @@ class Location < ActiveRecord::Base
       [:name, :address_street],
       [:name, :mail_address_city]
     ]
+  end
+
+  def self.within_radius(longitude, latitude, miles=5)
+    meters = 1_609.344 * miles
+
+    clause = "ST_Distance(ST_MakePoint(:longitude, :latitude), geo_point) < :meters"
+    where(clause, longitude: longitude, latitude: latitude, meters: meters)
   end
 
   def address_street
