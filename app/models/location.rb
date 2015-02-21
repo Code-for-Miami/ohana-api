@@ -36,8 +36,8 @@ class Location < ActiveRecord::Base
             },
             unless: ->(location) { location.virtual? }
 
-  # validates :description, :organization, :name,
-  #           presence: { message: I18n.t('errors.messages.blank_for_location') }
+  validates :description, :organization, :name,
+            presence: { message: I18n.t('errors.messages.blank_for_location') }
 
   ## Uncomment the line below if you want to require a short description.
   ## We recommend having a short description so that web clients can display
