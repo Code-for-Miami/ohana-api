@@ -1,0 +1,23 @@
+%h3 Location
+
+.btn-group
+  = link_to 'JSON', params.merge(format: 'json'), {class: 'btn btn-default'}
+
+%code
+  %pre= location.pretty_inspect
+
+%h4 phones
+
+%code
+  %pre= location.phones.pretty_inspect
+
+%h4 other
+
+%code
+  %pre= location.services.pretty_inspect
+  - %i{categories contacts phones regular_schedules holiday_schedules}.each do |m|
+    %pre= location.services.map(&m).pretty_inspect
+  %pre= location.organization.contacts.pretty_inspect
+  %pre= location.contacts.map(&:phones).pretty_inspect
+  %pre= location.regular_schedules.pretty_inspect
+  %pre= location.holiday_schedules.pretty_inspect
