@@ -1,0 +1,24 @@
+.results {
+	max-width: 800px;
+	margin: 0 auto;
+}
+.results-org {
+	margin: 20px 0;
+	border: 1px solid #ddd;
+	padding: 15px;
+}
+.results-org > div {
+	padding: 20px;
+}
+.results-org-location
+ {
+	background-color: #eee;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	padding: 10px;
+	margin: 10px auto;
+}
+
+.location-description {
+	font-style: italic;
+}

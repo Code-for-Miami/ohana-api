@@ -3,23 +3,78 @@
 .btn-group
   = link_to 'JSON', params.merge(format: 'json'), {class: 'btn btn-default'}
 
-%table
-  %thead
-    %tr
-      %th name
-      %th organization
-      %th address
-      %th phones
-      %th literally everything else
-  %tbody
-    - locations.each do |l|
-      %tr
-        %th= l.name
-        %td
-          %pre= l.organization.pretty_inspect
-        %td
-          %pre= l.address.pretty_inspect
-        %td
-          %pre= l.phones.pretty_inspect
-        %td
-          %pre= l.pretty_inspect
+
+
+%section{class: "results"}
+  - locations.each do |l|
+    %article{class: "results-org"}
+      %h2= l.organization.name
+      %p= l.organization.description
+
+      %h3= l.name
+      %p= l.description
+
+      - if l.organization.date_incorporated
+        = "Date Incorporated: " + l.organization.date_incorporated.to_s
+
+      %div{class: "results-org-info"}
+
+        - if l.address
+          %p{class: "results-org-info-address"}
+            %strong Address
+            %br
+            = l.address.street_1 ? l.address.street_1 : "n/a"
+            - if l.address.street_2
+              %br
+              = l.address.street_2
+            %br
+            = l.address.city + ", " + l.address.state + " " + l.address.postal_code
+
+        - if l.phones.any?
+          %p{class: "results-org-info-phones"}
+            %strong Phone Numbers
+            %br
+            - l.phones.each do |phone|
+              = phone.number_type.capitalize + ": " + phone.number
+              %br
+
+        %ul
+          %li
+            %strong Accessibility: 
+            = l.accessibility && l.accessibility.any? ? l.accessibility.join(", ") : "n/a"
+          %li
+            %strong Languages:
+            = l.languages && l.languages.any? ? l.languages.join(", ") : "n/a"
+          %li
+            %strong Admin Emails: 
+            = l.admin_emails && l.admin_emails.any? ? l.admin_emails.join(", ") : "n/a"
+          %li
+            %strong Transportation:
+            = l.transportation ? l.transportation : "n/a"
+          %li
+            %strong Latitutde:
+            = l.latitude ? l.latitude : "n/a"
+          %li
+            %strong Longitude:
+            = l.longitude ? l.longitude : "n/a"         
+          %li
+            %strong Email:
+            = l.organization.email ? l.organization.email : "n/a"
+          %li
+            %strong Legal Status:
+            = l.organization.legal_status ? l.organization.legal_status : "n/a"
+          %li
+            %strong Tax ID:
+            = l.organization.tax_id ? l.organization.tax_id : "n/a"
+          %li
+            %strong Tax Status:
+            = l.organization.tax_status ? l.organization.tax_status : "n/a"
+          %li
+            %strong Funding Sources:
+            = l.organization.funding_sources && l.organization.funding_sources.any? ? l.organization.funding_sources.join(", ") : "n/a"
+          %li
+            %strong Accreditations:
+            = l.organization.accreditations && l.organization.accreditations.any? ? l.organization.accreditations.join(", ") : "n/a"
+          %li
+            %strong Licenses:
+            = l.organization.licenses && l.organization.licenses.any? ? l.organization.licenses.join(", ") : "n/a"
