@@ -86,7 +86,7 @@ end
 group :development do
   gem 'quiet_assets', '>= 1.0.2'
   gem 'better_errors', '>= 0.7.2'
-  gem 'binding_of_caller', '>= 0.7.1', platforms: [:mri_19, :rbx]
+  gem 'binding_of_caller', '>= 0.7.1', platforms: [:mri_19, :rbx, :mri_22]
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen'
