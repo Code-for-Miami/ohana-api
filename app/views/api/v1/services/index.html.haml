@@ -1,0 +1,25 @@
+%h3 services for #{location.name}
+
+.btn-group
+  = link_to 'JSON', params.merge(format: 'json'), {class: 'btn btn-default'}
+
+%table
+  %thead
+    %th name
+    %th categories
+    %th contacts
+    %th phones
+    %th schedules
+    %th else
+  %tbody
+    - services.each do |s|
+      %tr
+        %th= s.name
+        %td= s.categories.pretty_inspect
+        %td= s.contacts.pretty_inspect
+        %td= s.phones.pretty_inspect
+        %td
+          = s.regular_schedules.pretty_inspect
+          %br
+          = s.holiday_schedules.pretty_inspect
+        %td= s.pretty_inspect

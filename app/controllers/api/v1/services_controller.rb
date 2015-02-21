@@ -12,7 +12,10 @@ module Api
           services: [:categories, :contacts, :phones, :regular_schedules,
                      :holiday_schedules]).find(params[:location_id])
         services = location.services
-        render json: services, status: 200
+        respond_to do |format|
+          format.json { render json: services, status: 200 }
+          format.html { render locals: { services: services, location: location } }
+        end
       end
 
       def update
