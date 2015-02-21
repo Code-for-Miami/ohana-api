@@ -1,0 +1,6 @@
+%h3 Organization
+
+.btn-group
+  = link_to 'JSON', params.merge(format: 'json'), {class: 'btn btn-default'}
+
+%pre=org.inspect
