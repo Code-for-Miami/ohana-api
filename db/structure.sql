@@ -23,6 +23,20 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
+--
+-- Name: postgis; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS postgis WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION postgis; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION postgis IS 'PostGIS geometry, geography, and raster spatial types and functions';
+
+
 SET search_path = public, pg_catalog;
 
 --
@@ -359,7 +373,8 @@ CREATE TABLE locations (
     virtual boolean DEFAULT false,
     active boolean DEFAULT true,
     website character varying(255),
-    email character varying(255)
+    email character varying(255),
+    geo_point geography(Point,4326)
 );
 
 
@@ -1373,4 +1388,6 @@ INSERT INTO schema_migrations (version) VALUES ('20141118132537');
 INSERT INTO schema_migrations (version) VALUES ('20141208165502');
 
 INSERT INTO schema_migrations (version) VALUES ('20150107163352');
+
+INSERT INTO schema_migrations (version) VALUES ('20150221194702');
 
