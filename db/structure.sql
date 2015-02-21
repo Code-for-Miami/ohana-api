@@ -202,6 +202,37 @@ ALTER SEQUENCE api_applications_id_seq OWNED BY api_applications.id;
 
 
 --
+-- Name: bus_stops; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE bus_stops (
+    ogc_fid integer NOT NULL,
+    wkb_geometry geometry(Point,4326),
+    name character varying,
+    description character varying
+);
+
+
+--
+-- Name: bus_stops_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE bus_stops_ogc_fid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: bus_stops_ogc_fid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE bus_stops_ogc_fid_seq OWNED BY bus_stops.ogc_fid;
+
+
+--
 -- Name: categories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -710,6 +741,13 @@ ALTER TABLE ONLY api_applications ALTER COLUMN id SET DEFAULT nextval('api_appli
 
 
 --
+-- Name: ogc_fid; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY bus_stops ALTER COLUMN ogc_fid SET DEFAULT nextval('bus_stops_ogc_fid_seq'::regclass);
+
+
+--
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -818,6 +856,14 @@ ALTER TABLE ONLY api_applications
 
 
 --
+-- Name: bus_stops_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY bus_stops
+    ADD CONSTRAINT bus_stops_pkey PRIMARY KEY (ogc_fid);
+
+
+--
 -- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -911,6 +957,13 @@ ALTER TABLE ONLY services
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: bus_stops_wkb_geometry_geom_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX bus_stops_wkb_geometry_geom_idx ON bus_stops USING gist (wkb_geometry);
 
 
 --
@@ -1051,6 +1104,13 @@ CREATE INDEX index_holiday_schedules_on_service_id ON holiday_schedules USING bt
 --
 
 CREATE INDEX index_locations_on_active ON locations USING btree (active);
+
+
+--
+-- Name: index_locations_on_geo_point; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_locations_on_geo_point ON locations USING gist (geo_point);
 
 
 --
@@ -1390,4 +1450,6 @@ INSERT INTO schema_migrations (version) VALUES ('20141208165502');
 INSERT INTO schema_migrations (version) VALUES ('20150107163352');
 
 INSERT INTO schema_migrations (version) VALUES ('20150221194702');
+
+INSERT INTO schema_migrations (version) VALUES ('20150221202710');
 
