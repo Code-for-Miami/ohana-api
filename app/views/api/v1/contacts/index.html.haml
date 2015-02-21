@@ -1,0 +1,13 @@
+%h3 Contacts for Location
+
+.btn-group
+  = link_to 'JSON', params.merge(format: 'json'), {class: 'btn btn-default'}
+
+%table
+  %thead
+    %th Name
+    %th literally everything else
+  %tbody
+    - contacts.each do |c|
+      %th= c.name
+      %td= c.pretty_inspect

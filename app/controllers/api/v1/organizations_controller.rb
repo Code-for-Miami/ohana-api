@@ -14,7 +14,10 @@ module Api
 
       def show
         org = Organization.find(params[:id])
-        render json: org, status: 200
+        respond_to do |format|
+          format.json { render json: org, status: 200 }
+          format.html { render locals: { org: org } }
+        end
       end
 
       def update

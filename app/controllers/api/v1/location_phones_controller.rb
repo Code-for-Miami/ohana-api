@@ -7,7 +7,10 @@ module Api
       def index
         location = Location.find(params[:location_id])
         phones = location.phones
-        render json: phones, status: 200
+        respond_to do |format|
+          format.json { render json: phones, status: 200 }
+          format.html { render locals: { phones: phones } }
+        end
       end
 
       def update
