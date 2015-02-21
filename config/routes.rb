@@ -61,7 +61,9 @@ Rails.application.routes.draw do
           resources :services
         end
 
-        resources :search, only: :index
+        resources :search, only: :index do |s|
+          get :bus, on: :collection
+        end
 
         resources :categories, only: :index
 
