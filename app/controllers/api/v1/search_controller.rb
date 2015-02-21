@@ -11,9 +11,14 @@ module Api
         locations = Location.search(params).page(params[:page]).
                     per(params[:per_page])
 
-        if stale?(etag: cache_key(locations), public: true)
-          generate_pagination_headers(locations)
-          render json: locations.preload(tables), each_serializer: LocationsSerializer, status: 200
+        respond_to do |format|
+          format.json do
+            if stale?(etag: cache_key(locations), public: true)
+              generate_pagination_headers(locations)
+              render json: locations.preload(tables), each_serializer: LocationsSerializer, status: 200
+            end
+          end
+          format.html { render locals: { locations: locations.preload(tables) } }
         end
       end
 
