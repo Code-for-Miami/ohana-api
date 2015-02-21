@@ -104,6 +104,13 @@ class Location < ActiveRecord::Base
     where(clause, longitude: longitude, latitude: latitude, meters: meters)
   end
 
+  def self.within_radius_of_bus_stop(miles=0.25)
+    meters = 1_609.344 * miles
+
+    clause = "st_distance(geo_point, (select st_collect(wkb_geometry) from bus_stops)) < :meters"
+    where(clause, meters: meters)
+  end
+
   def address_street
     address.street_1 if address.present?
   end
