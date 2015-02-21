@@ -1,0 +1,17 @@
+%h3 Location Phones
+
+.btn-group
+  = link_to 'JSON', params.merge(format: 'json'), {class: 'btn btn-default'}
+
+%table
+  %thead
+    %tr
+      %th number
+      %th type
+      %th else
+  %tbody
+    - phones.each do |p|
+      %tr
+        %th= p.number
+        %td= p.number_type
+        %td= p.pretty_inspect
