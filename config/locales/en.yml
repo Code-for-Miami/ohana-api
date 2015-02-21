@@ -21,7 +21,7 @@
 
 en:
   admin:
-    api_location: 'San Mateo County'
+    api_location: 'Miami-Dade County'
     not_authorized: 'You are not authorized to perform this action.'
 
   enumerize:
