@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-ruby '2.2.0'
-gem 'rails', '~> 4.2.0'
+ruby '2.2.2'
+gem 'rails', '~> 4.2'
 
 gem 'pg'
 
@@ -90,4 +90,6 @@ group :development do
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen'
+  gem 'pry-byebug'
+  gem 'irbtools', require: 'irbtools/binding'
 end
