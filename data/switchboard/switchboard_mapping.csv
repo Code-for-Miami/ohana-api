@@ -1,0 +1,33 @@
+0,"Provider",Organization.Location.Service.alternate_name
+1,"Provider ID",
+2,"Provider Name",Organization.Location.Service.name
+3,"Provider Parent Provider",Organization.(name & description) & Organization.Location.(name & description)
+4,"Provider Description",Organization.Location.Service.description
+5,"Provider Eligibility",Organization.Location.Service.eligibility
+6,"Provider Hours",
+7,"Provider Intake / Application Process",Organization.Location.Service.how_to_apply
+8,"Provider Languages",Organization.Location.Service.languages
+9,"Provider Program Fees",Organization.Location.Service.fees
+10,"Provider Shelter Requirements",
+11,"Provider Volunteer Opportunities",
+12,"Provider Website Address",Organization.Location.Service.website
+13,"Address Type","Mailing means MailAddress, Physical means Address"
+14,"Address Line1","Organization.Location.(MailAddress|Addresss).street_1"
+15,"Address Line2","Organization.Location.(MailAddress|Addresss).street_2"
+16,"Address City","Organization.Location.(MailAddress|Addresss).city"
+17,"Address Province","Organization.Location.(MailAddress|Addresss).state"
+18,"Address Postal Code","Organization.Location.(MailAddress|Addresss).postal_code"
+19,"Address County",
+20,"Address Is Primary Address",
+21,"Contact Name",Organization.Contact.name
+22,"Contact Title",Organization.Contact.title
+23,"Contact Email",Organization.Contact.email
+24,"Contact Telephone Number",Organization.Contact.Phone.number
+25,"Contact Is Primary Contact",
+26,"Telephone Number",Organization.Phone.number
+27,"Telephone Is Primary Telephone",
+28,"Service Code",Organization.Location.Service.Taxonomy.id
+29,"Service Code Description",Organization.Location.Service.Taxonomy.name
+30,"Service Code Type Service",Organization.Location.Service.Taxonomy.parent_name
+31,"Service Code Out Of Resource",
+32,"Geography Served by State, State Name",
