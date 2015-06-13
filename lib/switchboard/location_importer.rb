@@ -6,8 +6,7 @@ module Switchboard
       if service.nil?
         service = Switchboard::ServiceImporter.from_row(row)
 
-        loc = Location.new
-        loc.name = row[:provider_parent_provider]
+        loc = Location.find_or_initialize_by name: row[:provider_parent_provider]
         loc.description = loc.name
         loc.services << service
 
