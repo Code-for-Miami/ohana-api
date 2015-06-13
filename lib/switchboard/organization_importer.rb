@@ -9,10 +9,6 @@ module Switchboard
       binding.pry unless org.save
       org.save!
 
-      loc = Switchboard::LocationImporter.from_row row
-      org.locations << loc
-      loc.save!
-
       contact = Switchboard::ContactImporter.from_row row
       org.contacts << contact
       contact.save!
@@ -25,6 +21,12 @@ module Switchboard
         puts "Invalid phone number format"
         puts phone.errors.messages
       end
+
+      loc = Switchboard::LocationImporter.from_row row
+      org.locations << loc
+      loc.contacts << contact
+      loc.phones << phone if phone.valid?
+      loc.save!
 
       org
     end
