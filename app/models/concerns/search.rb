@@ -57,8 +57,8 @@ module Search
     def search(params = {})
       text_search(params).
         with_email(params[:email]).
-        is_near(params[:location], params[:lat_lng], params[:radius]).
-        uniq
+        is_near(params[:location], params[:lat_lng], params[:radius])#.
+        #to_a.uniq
     end
 
     def allowed_params(params)
