@@ -31,6 +31,18 @@ module Api
         generate_pagination_headers(locations_near(location))
       end
 
+      def bus
+        miles = params[:miles].to_f
+
+        locations = Location.within_radius_of_bus_stop(miles).preload(tables)
+        respond_to do |format|
+          format.json do
+            render json: locations.preload(tables), each_serializer: LocationsSerializer, status: 200
+          end
+          format.html { render locals: {locations: locations, miles: miles} }
+        end
+      end
+
       private
 
       def tables
