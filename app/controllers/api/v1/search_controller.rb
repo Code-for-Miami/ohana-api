@@ -43,6 +43,30 @@ module Api
         end
       end
 
+      def school
+        #        school = PublicSchool.find_by(id: params[:school_id])
+        school = PublicSchool.first
+        miles = params[:miles].to_f
+
+        locations = school.locations_in_miles miles
+
+        respond_to do |format|
+          format.json do
+            render(json: locations.preload(tables),
+                   each_serializer: LocationsSerializer,
+                   status: 200)
+          end
+
+          format.html do
+            render locals: {
+                     locations: locations,
+                     miles: miles,
+                     school: school
+                   }
+          end
+        end
+      end
+
       private
 
       def tables
