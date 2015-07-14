@@ -1,7 +1,7 @@
 namespace :import do
   task all: [:organizations, :programs, :locations, :taxonomy, :services,
              :mail_addresses, :contacts, :phones, :regular_schedules,
-             :holiday_schedules]
+             :holiday_schedules, :public_schools]
 
   desc 'Imports organizations'
   task :organizations, [:path] => :environment do |_, args|
@@ -74,5 +74,35 @@ namespace :import do
     Kernel.puts('Importing your holiday_schedules...')
     args.with_defaults(path: Rails.root.join('data/holiday_schedules.csv'))
     HolidayScheduleImporter.check_and_import_file(args[:path])
+  end
+
+  desc 'Imports public schools'
+  task :public_schools => :environment do
+    dbname = OhanaApi::Application.
+             config.
+             database_configuration[Rails.env]['database']
+    sh "ogr2ogr -f 'PostgreSQL' PG:'dbname=#{dbname}' data/Public_School.json -nln public_school_import"
+    ActiveRecord::Base.connection.execute <<-SQL
+      CREATE VIEW public_schools AS
+        SELECT
+          ogc_fid as id,
+          wkb_geometry,
+          ST_X(wkb_geometry) as lat,
+          ST_Y(wkb_geometry) as lon,
+          folio,
+          name,
+          campus,
+          address,
+          unit,
+          city,
+          zipcode,
+          phone,
+          type,
+          grades,
+          capacity,
+          enrollmnt,
+          region
+        FROM public_school_import;
+    SQL
   end
 end
