@@ -63,6 +63,7 @@ Rails.application.routes.draw do
 
         resources :search, only: :index do |s|
           get :bus, on: :collection
+          get :school, on: :collection
         end
 
         resources :categories, only: :index
