@@ -97,7 +97,7 @@ namespace :import do
           city,
           zipcode,
           phone,
-          type,
+          type as school_type,
           grades,
           capacity,
           enrollmnt,
